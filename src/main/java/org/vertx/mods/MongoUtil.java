@@ -55,11 +55,9 @@ public class MongoUtil {
             throw new IllegalArgumentException("Cannot convert null to JsonObject");
         }
 
-        // Create JSON string from DBObject
-        String serialize = JSONSerializers.getStrict().serialize(dbObject);
+        String json = JSONSerializers.getStrict().serialize(dbObject);
 
-        // Convert to JsonObject
-        HashMap<String, Object> jsonMap = Json.decodeValue(serialize, HashMap.class);
+        HashMap<String, Object> jsonMap = Json.decodeValue(json, HashMap.class);
         return new JsonObject(jsonMap);
     }
 }

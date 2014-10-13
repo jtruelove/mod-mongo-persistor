@@ -19,11 +19,11 @@ public class MongoUtilTest {
     @Test
     public void testConvertBsonToJson() {
         String testValue = "{\"testKey\" : \"testValue\"}";
-        DBObject obj = MongoUtil.convertJsonToBson(testValue);
+        DBObject mongoDbObject = MongoUtil.convertJsonToBson(testValue);
         Date date = new Date();
-        obj.put("created", date);
+        mongoDbObject.put("created", date);
 
-        JsonObject json = MongoUtil.convertBsonToJson(obj);
+        JsonObject json = MongoUtil.convertBsonToJson(mongoDbObject);
         JsonObject value = json.getValue("created");
         assertTrue(value.getLong("$date") == date.getTime());
     }
@@ -31,14 +31,14 @@ public class MongoUtilTest {
     @Test
     public void testConvertJsonToBson() {
         ObjectId id = new ObjectId();
-        DBObject obj = new BasicDBObject();
-        obj.put("id", id);
+        DBObject mongoDBObject = new BasicDBObject();
+        mongoDBObject.put("id", id);
         Date date = new Date();
-        obj.put("created", date);
+        mongoDBObject.put("created", date);
         Integer [] numbers =  new Integer [] {1,2,3};
-        obj.put("values", numbers);
+        mongoDBObject.put("values", numbers);
 
-        JsonObject jsonObject = MongoUtil.convertBsonToJson(obj);
+        JsonObject jsonObject = MongoUtil.convertBsonToJson(mongoDBObject);
         DBObject convertedObj = MongoUtil.convertJsonToBson(jsonObject);
 
         assertTrue(convertedObj.get("id").equals(id));
