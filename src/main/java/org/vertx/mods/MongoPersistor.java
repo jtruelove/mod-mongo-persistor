@@ -32,7 +32,7 @@ import java.util.UUID;
 
 /**
  * MongoDB Persistor Bus Module<p>
- * Please see the README.md for a full description<p>
+ * Please see the README.md for a full descrition<p>
  *
  * @author <a href="http://tfox.org">Tim Fox</a>
  * @author Thomas Risberg
@@ -122,6 +122,7 @@ public class MongoPersistor extends BusModBase implements Handler<Message<JsonOb
 
   @Override
   public void handle(Message<JsonObject> message) {
+
     String action = message.body().getString("action");
 
     if (action == null) {
